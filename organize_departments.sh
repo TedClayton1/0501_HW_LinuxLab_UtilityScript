@@ -20,3 +20,9 @@ mkdir -p "$BASE_DIR/it"
 mkdir -p "$BACKUP_DIR"
 mkdir -p "$REPORT_DIR"
 mkdir -p "$TEMP_DIR"
+
+# Creating sample files
+touch "$BASE_DIR/hr/employee_promotions.txt"
+touch "$BASE_DIR/sales/sales_reports.txt"
+touch "$BASE_DIR/finance/financial_statements.txt"
+touch "$BASE_DIR/it/technical_documents.txt"
