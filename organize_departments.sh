@@ -6,7 +6,7 @@ BACKUP_DIR="/c/Users/Admin/Documents/TheoWAF/logs_backup"
 REPORT_DIR="/c/Users/Admin/Documents/TheoWAF/reports"
 TEMP_DIR="/c/Users/Admin/Documents/TheoWAF/temp_files"
 
-REPORT_FILE="$REPORT_DIR/final_report.txt"
+REPORT_FILE="$REPORT_DIR/final_report.txt" 
 
 echo "Starting department file organization script right now..."
 echo "The current working directory:"
@@ -38,6 +38,7 @@ echo "Copying files to backup directory..."
 cp -v "$BASE_DIR/hr/employee_list.txt" "$BACKUP_DIR/"
 cp -v "$BASE_DIR/finance/budget_report.txt" "$BACKUP_DIR/"
 cp -v "$BASE_DIR/it/server_inventory.txt" "$BACKUP_DIR/"
+cp -v "$BASE_DIR/sales/sales_reports.txt" "$BACKUP_DIR/"
 
 # Copy full folder structure
 cp -rv "$BASE_DIR" "$BACKUP_DIR/full_logs_backup"
