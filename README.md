@@ -65,5 +65,43 @@ The `-p` flag allows parent directories to be created if necessary and prevents 
 
 ---
 
+## Creating Sample Files
+
+The script creates sample files for each department using the `touch` command:
+
+```bash
+touch "$BASE_DIR/hr/employee_promotions.txt"
+touch "$BASE_DIR/sales/sales_reports.txt"
+touch "$BASE_DIR/finance/financial_statements.txt"
+touch "$BASE_DIR/it/technical_documents.txt"
+```
+
+---
+## Print messages to the terminal and write content into the file(s)
+
+```bash
+echo "HR employee promotions file created for HR department." > "$BASE_DIR/hr/employee_promotions.txt"
+echo "Sales reports file also created for the sales department." > "$BASE_DIR/sales/sales_reports.txt"
+echo "Financial statements file created for the finance dept." > "$BASE_DIR/finance/financial_statements.txt"
+echo "Technical documents file created for the IT department." > "$BASE_DIR/it/technical_documents.txt"
+```
+
+## Copy files to backup directory
+
+```bash
+echo "Copying files to backup directory..."
+cp -v "$BASE_DIR/hr/employee_list.txt" "$BACKUP_DIR/"
+cp -v "$BASE_DIR/finance/budget_report.txt" "$BACKUP_DIR/"
+cp -v "$BASE_DIR/it/server_inventory.txt" "$BACKUP_DIR/"
+cp -v "$BASE_DIR/sales/sales_reports.txt" "$BACKUP_DIR/"
+```
+
+# Copy full folder structure
+
+```bash
+cp -rv "$BASE_DIR" "$BACKUP_DIR/full_logs_backup"
+```
+
+
 
 
