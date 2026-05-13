@@ -2,167 +2,148 @@
 
 ## Workplace Scenario
 
-In this assignment, I am acting as a junior systems administrator responsible for managing department folders on a Linux server. My task is to create a Bash utility script that organizes incoming department files, creates backup locations, moves and renames selected files, removes temporary files, and generates a final report summarizing the actions performed by the script.
+In this assignment, I am acting as a junior systems administrator responsible for helping organize department files on a Linux server. Different departments such as HR, Sales, Finance, and IT have files that need to be created, organized, backed up, renamed, and documented. This script helps automate those tasks and creates a report showing what happened.
 
----
+## Description of the Script
 
-## Description of the Bash Script
+This Bash script performs several file management tasks. It creates department folders, creates sample department files, writes content into those files, copies files to a backup location, renames a finance file, removes temporary files, lists folder contents, and creates a final report.
 
-This Bash script automates the organization of department files by:
+The final report includes:
 
-- Creating department directories
-- Creating sample files for departments
-- Writing sample content into files
-- Copying important files to a backup location
-- Renaming department files
-- Removing temporary files and folders
-- Displaying directory contents
-- Generating a final report with timestamps and actions completed
+- The date and time the script ran
+- The directories created
+- The files copied
+- The file renamed
+- The temporary files removed
 
-The script is designed to simulate real-world junior system administration tasks performed on Linux servers.
+## Linux Commands Used
 
----
+### `mkdir`
 
-## Defining Directories
+The `mkdir` command creates directories.
 
-The script defines the following directory variables:
+I used `mkdir -p` to create department folders, backup folders, report folders, and temporary folders. The `-p` flag is useful because it prevents errors if the folder already exists.
 
-- `BASE_DIR`
-- `BACKUP_DIR`
-- `REPORT_DIR`
-- `TEMP_DIR`
+### `touch`
 
-The script also defines:
+The `touch` command creates empty files.
 
-- `REPORT_FILE`
+I used `touch` to create sample files for HR, Sales, Finance, IT, and a temporary notes file.
 
-which stores the path to the final report text file.
+### `echo`
 
-The script prints status messages to the terminal, including:
-- when the script starts
-- the current working directory
-- progress updates throughout execution
+The `echo` command prints text to the terminal or writes text into files.
 
----
+I used `echo` to display status messages and to write content into the sample files and final report.
 
-## Creating Directories
+### `cp`
 
-The script checks whether required directories already exist. If they do not exist, the script creates them using the `mkdir -p` command.
+The `cp` command copies files or directories.
 
-The following directories are created:
+I used `cp -v` to copy department files into the backup directory. I also used `cp -rv` to copy the full logs folder into the backup folder.
+
+### `mv`
+
+The `mv` command moves or renames files.
+
+I used `mv -v` to rename the finance file from `financial_statements.txt` to `final_financial_statements.txt`.
+
+### `rm`
+
+The `rm` command removes files or directories.
+
+I used `rm -v` to remove a temporary file and `rm -rv` to remove the temporary folder.
+
+### `ls`
+
+The `ls` command lists files and folders.
+
+I used `ls -al` to display detailed information about the main logs folder and backup folder.
+
+### `pwd`
+
+The `pwd` command shows the current working directory.
+
+I used `pwd` to show where the script was being run from.
+
+### `date`
+
+The `date` command displays the current date and time.
+
+I used `date` to add the script run time to the final report.
+
+### `cat`
+
+The `cat` command displays the contents of a file.
+
+I used `cat` to display the final report in the terminal after the script finished.
+
+### `chmod`
+
+The `chmod` command changes file permissions.
+
+I used `chmod +x` to make the script executable.
+
+## Useful Flags Used
+
+The script uses these command flags:
+
+- `mkdir -p`
+- `cp -v`
+- `cp -r`
+- `cp -rv`
+- `mv -v`
+- `rm -v`
+- `rm -r`
+- `rm -rv`
+- `ls -a`
+- `ls -l`
+- `chmod +x`
+
+## How to Run the Script
+
+Make sure you are inside the project repo folder.
+
+Make the script executable:
 
 ```bash
-mkdir -p "$BASE_DIR/hr"
-mkdir -p "$BASE_DIR/sales"
-mkdir -p "$BASE_DIR/finance"
-mkdir -p "$BASE_DIR/it"
-mkdir -p "$BACKUP_DIR"
-mkdir -p "$REPORT_DIR"
-mkdir -p "$TEMP_DIR"
+chmod +x organize_departments.sh
 ```
 
-The `-p` flag allows parent directories to be created if necessary and prevents errors if directories already exist.
-
----
-
-## Creating Sample Files
-
-The script creates sample files for each department using the `touch` command:
+Run the script:
 
 ```bash
-touch "$BASE_DIR/hr/employee_promotions.txt"
-touch "$BASE_DIR/sales/sales_reports.txt"
-touch "$BASE_DIR/finance/financial_statements.txt"
-touch "$BASE_DIR/it/technical_documents.txt"
+./organize_departments.sh
 ```
 
----
-## Print messages to the terminal and write content into the file(s)
+View the final report:
 
 ```bash
-echo "HR employee promotions file created for HR department." > "$BASE_DIR/hr/employee_promotions.txt"
-echo "Sales reports file also created for the sales department." > "$BASE_DIR/sales/sales_reports.txt"
-echo "Financial statements file created for the finance dept." > "$BASE_DIR/finance/financial_statements.txt"
-echo "Technical documents file created for the IT department." > "$BASE_DIR/it/technical_documents.txt"
+cat "$HOME/Documents/TheoWAF/reports/final_report.txt"
 ```
 
-## Copy files to backup directory
+## Git Commands Used to Submit
+
+Check the repo status:
 
 ```bash
-echo "Copying files to backup directory..."
-cp -v "$BASE_DIR/hr/employee_list.txt" "$BACKUP_DIR/"
-cp -v "$BASE_DIR/finance/budget_report.txt" "$BACKUP_DIR/"
-cp -v "$BASE_DIR/it/server_inventory.txt" "$BACKUP_DIR/"
-cp -v "$BASE_DIR/sales/sales_reports.txt" "$BACKUP_DIR/"
+git status
 ```
 
-## Copy full folder structure
+Add the updated files:
 
 ```bash
-cp -rv "$BASE_DIR" "$BACKUP_DIR/full_logs_backup"
+git add README.md organize_departments.sh
 ```
 
-## Move / rename a file
+Commit the changes:
 
 ```bash
-echo "Renaming finance budget file..."
-mv -v "$BASE_DIR/finance/budget_report.txt" "$BASE_DIR/finance/final_budget_report.txt" 
+git commit -m "Fix script formatting and complete README documentation"
 ```
 
-## Remove temporary file and folder
+Push to GitHub:
 
 ```bash
-echo "Removing temporary files and folders..."
-rm -v "$TEMP_DIR/temp_notes.txt"
-rm -rv "$TEMP_DIR"
-``` 
-
-## Display folder contents
-
-```bash
-echo "Displaying organized folder contents..."
-ls -al "$BASE_DIR"
-ls -al "$BACKUP_DIR"
-``` 
-
-## Create final report
-
-```bash
-echo "Department File Organization Report" > "$REPORT_FILE"
-echo "-----------------------------------" >> "$REPORT_FILE"
-echo "Script ran on:" >> "$REPORT_FILE"
-date >> "$REPORT_FILE"
-echo "" >> "$REPORT_FILE"
-
-echo "Directories created:" >> "$REPORT_FILE"
-echo "- $BASE_DIR/hr" >> "$REPORT_FILE"
-echo "- $BASE_DIR/finance" >> "$REPORT_FILE"
-echo "- $BASE_DIR/it" >> "$REPORT_FILE"
-echo "- $BASE_DIR/sales" >> "$REPORT_FILE"
-echo "- $BACKUP_DIR" >> "$REPORT_FILE"
-echo "- $REPORT_DIR" >> "$REPORT_FILE"
-echo "- $TEMP_DIR" >> "$REPORT_FILE"
-echo "" >> "$REPORT_FILE"
-
-echo "Files copied:" >> "$REPORT_FILE"
-echo "- employee_list.txt copied to $BACKUP_DIR" >> "$REPORT_FILE"
-echo "- budget_report.txt copied to $BACKUP_DIR" >> "$REPORT_FILE"
-echo "- server_inventory.txt copied to $BACKUP_DIR" >> "$REPORT_FILE"
-echo "- Full logs folder copied to $BACKUP_DIR/full_logs_backup" >> "$REPORT_FILE"
-echo "" >> "$REPORT_FILE"
-
-echo "Files moved or renamed:" >> "$REPORT_FILE"
-echo "- budget_report.txt renamed to final_budget_report.txt" >> "$REPORT_FILE"
-echo "" >> "$REPORT_FILE"
-
-echo "Temporary files removed:" >> "$REPORT_FILE"
-echo "- $TEMP_DIR/temp_notes.txt" >> "$REPORT_FILE"
-echo "- $TEMP_DIR" >> "$REPORT_FILE"
-echo "" >> "$REPORT_FILE"
-
-echo "Final report completed."
-
-
-
-
-
+git push origin main
+```
