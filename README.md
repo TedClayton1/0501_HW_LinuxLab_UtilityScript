@@ -96,11 +96,72 @@ cp -v "$BASE_DIR/it/server_inventory.txt" "$BACKUP_DIR/"
 cp -v "$BASE_DIR/sales/sales_reports.txt" "$BACKUP_DIR/"
 ```
 
-# Copy full folder structure
+## Copy full folder structure
 
 ```bash
 cp -rv "$BASE_DIR" "$BACKUP_DIR/full_logs_backup"
 ```
+
+## Move / rename a file
+
+```bash
+echo "Renaming finance budget file..."
+mv -v "$BASE_DIR/finance/budget_report.txt" "$BASE_DIR/finance/final_budget_report.txt" 
+```
+
+## Remove temporary file and folder
+
+```bash
+echo "Removing temporary files and folders..."
+rm -v "$TEMP_DIR/temp_notes.txt"
+rm -rv "$TEMP_DIR"
+``` 
+
+## Display folder contents
+
+```bash
+echo "Displaying organized folder contents..."
+ls -al "$BASE_DIR"
+ls -al "$BACKUP_DIR"
+``` 
+
+## Create final report
+
+```bash
+echo "Department File Organization Report" > "$REPORT_FILE"
+echo "-----------------------------------" >> "$REPORT_FILE"
+echo "Script ran on:" >> "$REPORT_FILE"
+date >> "$REPORT_FILE"
+echo "" >> "$REPORT_FILE"
+
+echo "Directories created:" >> "$REPORT_FILE"
+echo "- $BASE_DIR/hr" >> "$REPORT_FILE"
+echo "- $BASE_DIR/finance" >> "$REPORT_FILE"
+echo "- $BASE_DIR/it" >> "$REPORT_FILE"
+echo "- $BASE_DIR/sales" >> "$REPORT_FILE"
+echo "- $BACKUP_DIR" >> "$REPORT_FILE"
+echo "- $REPORT_DIR" >> "$REPORT_FILE"
+echo "- $TEMP_DIR" >> "$REPORT_FILE"
+echo "" >> "$REPORT_FILE"
+
+echo "Files copied:" >> "$REPORT_FILE"
+echo "- employee_list.txt copied to $BACKUP_DIR" >> "$REPORT_FILE"
+echo "- budget_report.txt copied to $BACKUP_DIR" >> "$REPORT_FILE"
+echo "- server_inventory.txt copied to $BACKUP_DIR" >> "$REPORT_FILE"
+echo "- Full logs folder copied to $BACKUP_DIR/full_logs_backup" >> "$REPORT_FILE"
+echo "" >> "$REPORT_FILE"
+
+echo "Files moved or renamed:" >> "$REPORT_FILE"
+echo "- budget_report.txt renamed to final_budget_report.txt" >> "$REPORT_FILE"
+echo "" >> "$REPORT_FILE"
+
+echo "Temporary files removed:" >> "$REPORT_FILE"
+echo "- $TEMP_DIR/temp_notes.txt" >> "$REPORT_FILE"
+echo "- $TEMP_DIR" >> "$REPORT_FILE"
+echo "" >> "$REPORT_FILE"
+
+echo "Final report completed."
+
 
 
 
